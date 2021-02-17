@@ -3,8 +3,6 @@
 #include <numeric>
 #include <string>
 
-#include <iostream>
-
 using namespace std::literals;
 
 namespace ratio
