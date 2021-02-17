@@ -3,7 +3,10 @@
 #include <iostream>
 #include <gtest/gtest.h>
 
-using ri = ratio::ratio<int>;
+template<typename T>
+using r = ratio::ratio<T>;
+
+using ri = r<int>;
 
 TEST(ratio, ctor_n_d_false)
 {
@@ -20,6 +23,19 @@ TEST(ratio, ctor_n_d_true)
 TEST(ratio, ctor_n)
 {
     EXPECT_EQ(ri(2), ri(2, 1, false));
+}
+
+TEST(ratio, negate)
+{
+    ri a(1);
+    EXPECT_EQ(a.negate(), ri(-1, 1));
+    EXPECT_EQ(a, ri(-1, 1));
+}
+
+TEST(ratio, negate_unsigned)
+{
+    r<unsigned int> a(1);
+    EXPECT_ANY_THROW(a.negate());
 }
 
 TEST(ratio, minus)
