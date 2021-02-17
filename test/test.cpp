@@ -17,7 +17,7 @@ TEST(ratio, ctor_n_d_false)
 
 TEST(ratio, ctor_n_d_true)
 {
-    EXPECT_EQ(ri(2, 2).reduce(), ri(1, 1, false));
+    EXPECT_EQ(ri(2, 2), ri(1, 1, false));
 }
 
 TEST(ratio, ctor_n)
