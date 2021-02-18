@@ -9,13 +9,13 @@ using namespace std::literals;
 namespace ratio
 {
     template<typename T>
-    ratio<T>::ratio(T n, T d, bool reduce) : numerator(n), denominator(d)
+    constexpr ratio<T>::ratio(T n, T d, bool reduce) : numerator(n), denominator(d)
     {
         if (reduce) this->reduce();
     }
 
     template<typename T>
-    auto operator==(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator==(ratio<T> l, ratio<T> r) -> bool
     {
         l.reduce();
         r.reduce();
@@ -32,7 +32,7 @@ namespace ratio
     template auto operator==(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto operator!=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator!=(ratio<T> l, ratio<T> r) -> bool
     {
         return !(l == r);
     }
@@ -47,7 +47,7 @@ namespace ratio
     template auto operator!=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto operator<(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator<(ratio<T> l, ratio<T> r) -> bool
     {
         l.reduce();
         r.reduce();
@@ -64,7 +64,7 @@ namespace ratio
     template auto operator<(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto operator<=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator<=(ratio<T> l, ratio<T> r) -> bool
     {
         return l < r || l == r;
     }
@@ -79,7 +79,7 @@ namespace ratio
     template auto operator<=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto operator>(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator>(ratio<T> l, ratio<T> r) -> bool
     {
         return r < l;
     }
@@ -94,7 +94,7 @@ namespace ratio
     template auto operator>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto operator>=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator>=(ratio<T> l, ratio<T> r) -> bool
     {
         return l > r || l == r;
     }
@@ -121,22 +121,18 @@ namespace ratio
     template<> auto ratio<unsigned long long int>::negate() -> ratio<unsigned long long int> { throw std::exception("unsigned values cannot be negated"); }
 
     template<typename T>
-    auto operator-(ratio<T> r) -> ratio<T>
+    auto constexpr operator-(ratio<T> r) -> ratio<T>
     {
         return r.negate();
     }
 
     template auto operator-(ratio<short int>) -> ratio<short int>;
-    template auto operator-(ratio<unsigned short int>) -> ratio<unsigned short int>;
     template auto operator-(ratio<int>) -> ratio<int>;
-    template auto operator-(ratio<unsigned int>) -> ratio<unsigned int>;
     template auto operator-(ratio<long int>) -> ratio<long int>;
-    template auto operator-(ratio<unsigned long int>) -> ratio<unsigned long int>;
     template auto operator-(ratio<long long int>) -> ratio<long long int>;
-    template auto operator-(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto operator+(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator+(ratio<T> l, ratio<T> r) -> ratio<T>
     {
         return ratio<T>(l.numerator * r.denominator + r.numerator * l.denominator, l.denominator * r.denominator).reduce();
     }
@@ -151,7 +147,7 @@ namespace ratio
     template auto operator+<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto operator-(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator-(ratio<T> l, ratio<T> r) -> ratio<T>
     {
         return l + r.negate();
     }
@@ -166,7 +162,7 @@ namespace ratio
     template auto operator-<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto operator*(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator*(ratio<T> l, ratio<T> r) -> ratio<T>
     {
         return ratio<T>(l.numerator * r.numerator, l.denominator * r.denominator).reduce();
     }
@@ -181,7 +177,7 @@ namespace ratio
     template auto operator*<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto operator/(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator/(ratio<T> l, ratio<T> r) -> ratio<T>
     {
         return l * r.invert();
     }
@@ -196,7 +192,7 @@ namespace ratio
     template auto operator/<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto ratio<T>::reduce() -> ratio<T>
+    auto constexpr ratio<T>::reduce() -> ratio<T>
     {
         if (denominator < 0) { numerator *= -1; denominator *= -1; }
         auto m = std::gcd(denominator, numerator);
@@ -206,7 +202,7 @@ namespace ratio
     }
 
     template<typename T>
-    auto reduce(ratio<T> r) -> ratio<T>
+    auto constexpr reduce(ratio<T> r) -> ratio<T>
     {
         return r.reduce();
     }
@@ -221,14 +217,14 @@ namespace ratio
     template auto reduce<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto ratio<T>::invert() -> ratio<T>
+    auto constexpr ratio<T>::invert() -> ratio<T>
     {
         std::swap(this->numerator, this->denominator);
         return *this;
     }
 
     template<typename T>
-    auto invert(ratio<T> r) -> ratio<T>
+    auto constexpr invert(ratio<T> r) -> ratio<T>
     {
         return r.invert();
     }
@@ -243,13 +239,13 @@ namespace ratio
     template auto invert<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto ratio<T>::to_double() -> double
+    auto constexpr ratio<T>::to_double() -> double
     {
         return static_cast<double>(this->numerator) / static_cast<double>(this->denominator);
     }
 
     template<typename T>
-    auto to_double(ratio<T> r) -> double
+    auto constexpr to_double(ratio<T> r) -> double
     {
         return r.to_double();
     }
@@ -264,13 +260,13 @@ namespace ratio
     template auto to_double<unsigned long long int>(ratio<unsigned long long int>) -> double;
 
     template<typename T> template<typename CharT, typename Traits, typename Allocator>
-    auto ratio<T>::to_string() -> std::basic_string<CharT, Traits, Allocator>
+    auto constexpr ratio<T>::to_string() -> std::basic_string<CharT, Traits, Allocator>
     {
         return std::to_string(this->numerator) + "/"s + std::to_string(this->denominator);
     }
 
     template<typename T, typename CharT, typename Traits, typename Allocator>
-    auto to_string(ratio<T> r) -> std::basic_string<CharT, Traits, Allocator>
+    auto constexpr to_string(ratio<T> r) -> std::basic_string<CharT, Traits, Allocator>
     {
         return r.to_string<CharT, Traits, Allocator>();
     }
