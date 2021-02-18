@@ -25,14 +25,14 @@ namespace ratio
         return l.numerator == r.numerator && l.denominator == r.denominator;
     }
 
-    template auto operator==(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator==(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator==(ratio<int>, ratio<int> r) -> bool;
-    template auto operator==(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator==(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator==(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator==(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator==(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator==(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator==(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator==(ratio<int>, ratio<int>) -> bool;
+    template auto operator==(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator==(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator==(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator==(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator==(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto operator!=(ratio<T> l, ratio<T> r) -> bool
@@ -40,14 +40,14 @@ namespace ratio
         return !(l == r);
     }
 
-    template auto operator!=(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator!=(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator!=(ratio<int>, ratio<int> r) -> bool;
-    template auto operator!=(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator!=(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator!=(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator!=(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator!=(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator!=(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator!=(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator!=(ratio<int>, ratio<int>) -> bool;
+    template auto operator!=(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator!=(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator!=(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator!=(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator!=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto operator<(ratio<T> l, ratio<T> r) -> bool
@@ -57,14 +57,14 @@ namespace ratio
         return l.numerator * r.denominator < r.numerator * l.denominator;
     }
 
-    template auto operator<(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator<(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator<(ratio<int>, ratio<int> r) -> bool;
-    template auto operator<(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator<(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator<(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator<(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator<(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator<(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator<(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator<(ratio<int>, ratio<int>) -> bool;
+    template auto operator<(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator<(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator<(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator<(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator<(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto operator<=(ratio<T> l, ratio<T> r) -> bool
@@ -72,14 +72,14 @@ namespace ratio
         return l < r || l == r;
     }
 
-    template auto operator<=(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator<=(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator<=(ratio<int>, ratio<int> r) -> bool;
-    template auto operator<=(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator<=(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator<=(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator<=(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator<=(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator<=(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator<=(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator<=(ratio<int>, ratio<int>) -> bool;
+    template auto operator<=(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator<=(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator<=(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator<=(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator<=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto operator>(ratio<T> l, ratio<T> r) -> bool
@@ -87,14 +87,14 @@ namespace ratio
         return r < l;
     }
 
-    template auto operator>(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator>(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator>(ratio<int>, ratio<int> r) -> bool;
-    template auto operator>(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator>(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator>(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator>(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator>(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator>(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator>(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator>(ratio<int>, ratio<int>) -> bool;
+    template auto operator>(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator>(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator>(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator>(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto operator>=(ratio<T> l, ratio<T> r) -> bool
@@ -102,14 +102,14 @@ namespace ratio
         return l > r || l == r;
     }
 
-    template auto operator>=(ratio<short int>, ratio<short int> r) -> bool;
-    template auto operator>=(ratio<unsigned short int>, ratio<unsigned short int> r) -> bool;
-    template auto operator>=(ratio<int>, ratio<int> r) -> bool;
-    template auto operator>=(ratio<unsigned int>, ratio<unsigned int> r) -> bool;
-    template auto operator>=(ratio<long int>, ratio<long int> r) -> bool;
-    template auto operator>=(ratio<unsigned long int>, ratio<unsigned long int> r) -> bool;
-    template auto operator>=(ratio<long long int>, ratio<long long int> r) -> bool;
-    template auto operator>=(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> bool;
+    template auto operator>=(ratio<short int>, ratio<short int>) -> bool;
+    template auto operator>=(ratio<unsigned short int>, ratio<unsigned short int>) -> bool;
+    template auto operator>=(ratio<int>, ratio<int>) -> bool;
+    template auto operator>=(ratio<unsigned int>, ratio<unsigned int>) -> bool;
+    template auto operator>=(ratio<long int>, ratio<long int>) -> bool;
+    template auto operator>=(ratio<unsigned long int>, ratio<unsigned long int>) -> bool;
+    template auto operator>=(ratio<long long int>, ratio<long long int>) -> bool;
+    template auto operator>=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
     auto ratio<T>::negate() -> ratio<T>
@@ -144,14 +144,14 @@ namespace ratio
         return ratio<T>(l.numerator * r.denominator + r.numerator * l.denominator, l.denominator * r.denominator).reduce();
     }
 
-    template auto operator+<short int>(ratio<short int>, ratio<short int> r) -> ratio<short int>;
-    template auto operator+<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int> r) -> ratio<unsigned short int>;
-    template auto operator+<int>(ratio<int>, ratio<int> r) -> ratio<int>;
-    template auto operator+<unsigned int>(ratio<unsigned int>, ratio<unsigned int> r) -> ratio<unsigned int>;
-    template auto operator+<long int>(ratio<long int>, ratio<long int> r) -> ratio<long int>;
-    template auto operator+<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int> r) -> ratio<unsigned long int>;
-    template auto operator+<long long int>(ratio<long long int>, ratio<long long int> r) -> ratio<long long int>;
-    template auto operator+<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> ratio<unsigned long long int>;
+    template auto operator+<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
+    template auto operator+<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto operator+<int>(ratio<int>, ratio<int>) -> ratio<int>;
+    template auto operator+<unsigned int>(ratio<unsigned int>, ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto operator+<long int>(ratio<long int>, ratio<long int>) -> ratio<long int>;
+    template auto operator+<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto operator+<long long int>(ratio<long long int>, ratio<long long int>) -> ratio<long long int>;
+    template auto operator+<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto operator-(ratio<T> l, ratio<T> r) -> ratio<T>
@@ -159,14 +159,14 @@ namespace ratio
         return l + r.negate();
     }
 
-    template auto operator-<short int>(ratio<short int>, ratio<short int> r) -> ratio<short int>;
-    template auto operator-<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int> r) -> ratio<unsigned short int>;
-    template auto operator-<int>(ratio<int>, ratio<int> r) -> ratio<int>;
-    template auto operator-<unsigned int>(ratio<unsigned int>, ratio<unsigned int> r) -> ratio<unsigned int>;
-    template auto operator-<long int>(ratio<long int>, ratio<long int> r) -> ratio<long int>;
-    template auto operator-<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int> r) -> ratio<unsigned long int>;
-    template auto operator-<long long int>(ratio<long long int>, ratio<long long int> r) -> ratio<long long int>;
-    template auto operator-<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> ratio<unsigned long long int>;
+    template auto operator-<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
+    template auto operator-<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto operator-<int>(ratio<int>, ratio<int>) -> ratio<int>;
+    template auto operator-<unsigned int>(ratio<unsigned int>, ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto operator-<long int>(ratio<long int>, ratio<long int>) -> ratio<long int>;
+    template auto operator-<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto operator-<long long int>(ratio<long long int>, ratio<long long int>) -> ratio<long long int>;
+    template auto operator-<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto operator*(ratio<T> l, ratio<T> r) -> ratio<T>
@@ -174,14 +174,14 @@ namespace ratio
         return ratio<T>(l.numerator * r.numerator, l.denominator * r.denominator).reduce();
     }
 
-    template auto operator*<short int>(ratio<short int>, ratio<short int> r) -> ratio<short int>;
-    template auto operator*<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int> r) -> ratio<unsigned short int>;
-    template auto operator*<int>(ratio<int>, ratio<int> r) -> ratio<int>;
-    template auto operator*<unsigned int>(ratio<unsigned int>, ratio<unsigned int> r) -> ratio<unsigned int>;
-    template auto operator*<long int>(ratio<long int>, ratio<long int> r) -> ratio<long int>;
-    template auto operator*<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int> r) -> ratio<unsigned long int>;
-    template auto operator*<long long int>(ratio<long long int>, ratio<long long int> r) -> ratio<long long int>;
-    template auto operator*<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> ratio<unsigned long long int>;
+    template auto operator*<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
+    template auto operator*<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto operator*<int>(ratio<int>, ratio<int>) -> ratio<int>;
+    template auto operator*<unsigned int>(ratio<unsigned int>, ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto operator*<long int>(ratio<long int>, ratio<long int>) -> ratio<long int>;
+    template auto operator*<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto operator*<long long int>(ratio<long long int>, ratio<long long int>) -> ratio<long long int>;
+    template auto operator*<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto operator/(ratio<T> l, ratio<T> r) -> ratio<T>
@@ -189,14 +189,14 @@ namespace ratio
         return l * r.inverse();
     }
 
-    template auto operator/<short int>(ratio<short int>, ratio<short int> r) -> ratio<short int>;
-    template auto operator/<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int> r) -> ratio<unsigned short int>;
-    template auto operator/<int>(ratio<int>, ratio<int> r) -> ratio<int>;
-    template auto operator/<unsigned int>(ratio<unsigned int>, ratio<unsigned int> r) -> ratio<unsigned int>;
-    template auto operator/<long int>(ratio<long int>, ratio<long int> r) -> ratio<long int>;
-    template auto operator/<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int> r) -> ratio<unsigned long int>;
-    template auto operator/<long long int>(ratio<long long int>, ratio<long long int> r) -> ratio<long long int>;
-    template auto operator/<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int> r) -> ratio<unsigned long long int>;
+    template auto operator/<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
+    template auto operator/<unsigned short int>(ratio<unsigned short int>, ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto operator/<int>(ratio<int>, ratio<int>) -> ratio<int>;
+    template auto operator/<unsigned int>(ratio<unsigned int>, ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto operator/<long int>(ratio<long int>, ratio<long int>) -> ratio<long int>;
+    template auto operator/<unsigned long int>(ratio<unsigned long int>, ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto operator/<long long int>(ratio<long long int>, ratio<long long int>) -> ratio<long long int>;
+    template auto operator/<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto ratio<T>::reduce() -> ratio<T>
