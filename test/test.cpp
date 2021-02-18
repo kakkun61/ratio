@@ -124,6 +124,27 @@ TEST(ratio, inverse_func)
     EXPECT_EQ(a, ri(1, 2));
 }
 
+TEST(ratio, abs_member)
+{
+    ri a(-1, 2);
+    EXPECT_EQ(a.abs(), ri(1, 2));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, abs_member_unsigned)
+{
+    r<unsigned int> a(1, 2);
+    EXPECT_EQ(a.abs(), r<unsigned int>(1, 2));
+    EXPECT_EQ(a, r<unsigned int>(1, 2));
+}
+
+TEST(ratio, abs_func)
+{
+    ri a(-1, 2);
+    EXPECT_EQ(ratio::abs(a), ri(1, 2));
+    EXPECT_EQ(a, ri(-1, 2));
+}
+
 TEST(ratio, add)
 {
     ri a(1, 2);

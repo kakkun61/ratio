@@ -48,6 +48,9 @@ namespace ratio
         /// Invert this value.
         auto constexpr invert() -> ratio;
 
+        /// Make this absolute.
+        auto constexpr abs() -> ratio;
+
         /// Approximate this into a double-precision floating point number.
         auto constexpr to_double() -> double;
 
@@ -104,6 +107,12 @@ namespace ratio
     /// \param r
     template<typename T>
     auto constexpr invert(ratio<T> r) -> ratio<T>;
+
+    /// Return a new absolute value.
+    /// \tparam T
+    /// \param r
+    template<typename T>
+    auto constexpr abs(ratio<T> r) -> ratio<T>;
 
     /// Approximate this into a double-precision floating point number.
     /// \tparam T
