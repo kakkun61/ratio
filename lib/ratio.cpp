@@ -15,9 +15,6 @@ namespace ratio
     }
 
     template<typename T>
-    ratio<T>::ratio(T n) : ratio(n, 1, false) {}
-
-    template<typename T>
     auto operator==(ratio<T> l, ratio<T> r) -> bool
     {
         l.reduce();
@@ -186,7 +183,7 @@ namespace ratio
     template<typename T>
     auto operator/(ratio<T> l, ratio<T> r) -> ratio<T>
     {
-        return l * r.inverse();
+        return l * r.invert();
     }
 
     template auto operator/<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
@@ -224,26 +221,26 @@ namespace ratio
     template auto reduce<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto ratio<T>::inverse() -> ratio<T>
+    auto ratio<T>::invert() -> ratio<T>
     {
         std::swap(this->numerator, this->denominator);
         return *this;
     }
 
     template<typename T>
-    auto inverse(ratio<T> r) -> ratio<T>
+    auto invert(ratio<T> r) -> ratio<T>
     {
-        return r.inverse();
+        return r.invert();
     }
 
-    template auto inverse<short int>(ratio<short int>) -> ratio<short int>;
-    template auto inverse<unsigned short int>(ratio<unsigned short int>) -> ratio<unsigned short int>;
-    template auto inverse<int>(ratio<int>) -> ratio<int>;
-    template auto inverse<unsigned int>(ratio<unsigned int>) -> ratio<unsigned int>;
-    template auto inverse<long int>(ratio<long int>) -> ratio<long int>;
-    template auto inverse<unsigned long int>(ratio<unsigned long int>) -> ratio<unsigned long int>;
-    template auto inverse<long long int>(ratio<long long int>) -> ratio<long long int>;
-    template auto inverse<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
+    template auto invert<short int>(ratio<short int>) -> ratio<short int>;
+    template auto invert<unsigned short int>(ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto invert<int>(ratio<int>) -> ratio<int>;
+    template auto invert<unsigned int>(ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto invert<long int>(ratio<long int>) -> ratio<long int>;
+    template auto invert<unsigned long int>(ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto invert<long long int>(ratio<long long int>) -> ratio<long long int>;
+    template auto invert<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto ratio<T>::to_double() -> double

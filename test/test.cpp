@@ -113,14 +113,14 @@ TEST(ratio, reduce_func_denominator_zero)
 TEST(ratio, inverse_member)
 {
     ri a(1, 2);
-    EXPECT_EQ(a.inverse(), ri(2, 1));
+    EXPECT_EQ(a.invert(), ri(2, 1));
     EXPECT_EQ(a, ri(2, 1));
 }
 
 TEST(ratio, inverse_func)
 {
     ri a(1, 2);
-    EXPECT_EQ(ratio::inverse(a), ri(2, 1));
+    EXPECT_EQ(ratio::invert(a), ri(2, 1));
     EXPECT_EQ(a, ri(1, 2));
 }
 
