@@ -25,6 +25,36 @@ TEST(ratio, ctor_n)
     EXPECT_EQ(ri(2), ri(2, 1, false));
 }
 
+TEST(ratio, eq)
+{
+    ri a(1, 2), b(2, 4, false);
+    EXPECT_EQ(a, b);
+}
+
+TEST(ratio, lt)
+{
+    ri a(1, 2), b(1);
+    EXPECT_LT(a, b);
+}
+
+TEST(ratio, le)
+{
+    ri a(1);
+    EXPECT_LE(a, a);
+}
+
+TEST(ratio, gt)
+{
+    ri a(1), b(1, 2);
+    EXPECT_GT(a, b);
+}
+
+TEST(ratio, ge)
+{
+    ri a(1);
+    EXPECT_GE(a, a);
+}
+
 TEST(ratio, negate)
 {
     ri a(1);

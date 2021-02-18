@@ -28,13 +28,25 @@ namespace ratio
     };
 
     template<typename T>
-    auto operator-(ratio<T> r) -> ratio<T>;
-
-    template<typename T>
     auto operator==(ratio<T> l, ratio<T> r) -> bool;
 
     template<typename T>
     auto operator!=(ratio<T> l, ratio<T> r) -> bool;
+
+    template<typename T>
+    auto operator<(ratio<T> l, ratio<T>r) -> bool;
+
+    template<typename T>
+    auto operator<=(ratio<T> l, ratio<T>r) -> bool;
+
+    template<typename T>
+    auto operator>(ratio<T> l, ratio<T>r) -> bool;
+
+    template<typename T>
+    auto operator>=(ratio<T> l, ratio<T>r) -> bool;
+
+    template<typename T>
+    auto operator-(ratio<T> r) -> ratio<T>;
 
     template<typename T>
     auto operator+(ratio<T> l, ratio<T> r) -> ratio<T>;
