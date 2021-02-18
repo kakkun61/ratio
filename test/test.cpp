@@ -188,6 +188,70 @@ TEST(ratio, to_double_function_nan)
     EXPECT_DOUBLE_EQ(ratio::to_double(ri(1, 0)), std::numeric_limits<double>::infinity());
 }
 
+TEST(ratio, ceil_member)
+{
+    EXPECT_EQ(ri(3, 2).ceil(), 2);
+    EXPECT_EQ(ri(-3, 2).ceil(), -1);
+    EXPECT_EQ(ri(1, 1).ceil(), 1);
+    EXPECT_EQ(ri(-1, 1).ceil(), -1);
+}
+
+TEST(ratio, ceil_function)
+{
+    EXPECT_EQ(ratio::ceil(ri(3, 2)), 2);
+    EXPECT_EQ(ratio::ceil(ri(-3, 2)), -1);
+    EXPECT_EQ(ratio::ceil(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::ceil(ri(-1, 1)), -1);
+}
+
+TEST(ratio, floor_member)
+{
+    EXPECT_EQ(ri(3, 2).floor(), 1);
+    EXPECT_EQ(ri(-3, 2).floor(), -2);
+    EXPECT_EQ(ri(1, 1).floor(), 1);
+    EXPECT_EQ(ri(-1, 1).floor(), -1);
+}
+
+TEST(ratio, floor_function)
+{
+    EXPECT_EQ(ratio::floor(ri(3, 2)), 1);
+    EXPECT_EQ(ratio::floor(ri(-3, 2)), -2);
+    EXPECT_EQ(ratio::floor(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::floor(ri(-1, 1)), -1);
+}
+
+TEST(ratio, truncate_member)
+{
+    EXPECT_EQ(ri(3, 2).truncate(), 1);
+    EXPECT_EQ(ri(-3, 2).truncate(), -1);
+    EXPECT_EQ(ri(1, 1).truncate(), 1);
+    EXPECT_EQ(ri(-1, 1).truncate(), -1);
+}
+
+TEST(ratio, truncate_function)
+{
+    EXPECT_EQ(ratio::truncate(ri(3, 2)), 1);
+    EXPECT_EQ(ratio::truncate(ri(-3, 2)), -1);
+    EXPECT_EQ(ratio::truncate(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::truncate(ri(-1, 1)), -1);
+}
+
+TEST(ratio, round_member)
+{
+    EXPECT_EQ(ri(3, 2).round(), 2);
+    EXPECT_EQ(ri(-3, 2).round(), -2);
+    EXPECT_EQ(ri(1, 1).round(), 1);
+    EXPECT_EQ(ri(-1, 1).round(), -1);
+}
+
+TEST(ratio, round_function)
+{
+    EXPECT_EQ(ratio::round(ri(3, 2)), 2);
+    EXPECT_EQ(ratio::round(ri(-3, 2)), -2);
+    EXPECT_EQ(ratio::round(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::round(ri(-1, 1)), -1);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

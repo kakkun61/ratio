@@ -54,6 +54,18 @@ namespace ratio
         /// Approximate this into a double-precision floating point number.
         auto constexpr to_double() -> double;
 
+        /// Approximate this into a nearest integer not less than this.
+        auto constexpr ceil() -> T;
+
+        /// Approximate this into a nearest integer not greater than this.
+        auto constexpr floor() -> T;
+
+        /// Approximate this into a nearest integer not greater in magnitude than this.
+        auto constexpr truncate() -> T;
+
+        /// Approximate this into a nearest integer, rounding away from zero in halfway cases.
+        auto constexpr round() -> T;
+
         /// Convert this to its string representation.
         /// \tparam CharT
         /// \tparam Traits
@@ -119,6 +131,30 @@ namespace ratio
     /// \param r
     template<typename T>
     auto constexpr to_double(ratio<T> r) -> double;
+
+    /// Approximate this into a nearest integer not less than this.
+    /// \tparam T
+    /// \param r
+    template<typename T>
+    auto constexpr ceil(ratio<T> r) -> T;
+
+    /// Approximate this into a nearest integer not greater than this.
+    /// \tparam T
+    /// \param r
+    template<typename T>
+    auto constexpr floor(ratio<T> r) -> T;
+
+    /// Approximate this into a nearest integer not greater in magnitude than this.
+    /// \tparam T
+    /// \param r
+    template<typename T>
+    auto constexpr truncate(ratio<T> r) -> T;
+
+    /// Approximate this into a nearest integer, rounding away from zero in halfway cases.
+    /// \tparam T
+    /// \param r
+    template<typename T>
+    auto constexpr round(ratio<T> r) -> T;
 
     /// Convert this to its string representation.
     /// \tparam T

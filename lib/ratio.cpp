@@ -288,6 +288,107 @@ namespace ratio
     template auto to_double<long long int>(ratio<long long int>) -> double;
     template auto to_double<unsigned long long int>(ratio<unsigned long long int>) -> double;
 
+    template<typename T>
+    auto constexpr ratio<T>::ceil() -> T
+    {
+        auto quot = this->numerator / this->denominator;
+        auto rem = this->numerator % this->denominator;
+        if (0 < rem) {
+            quot++;
+        }
+        return quot;
+    }
+
+    template<typename T>
+    auto constexpr ceil(ratio<T> r) -> T
+    {
+        return r.ceil();
+    }
+
+    template auto ceil<short int>(ratio<short int>) -> short int;
+    template auto ceil<unsigned short int>(ratio<unsigned short int>) -> unsigned short int;
+    template auto ceil<int>(ratio<int>) -> int;
+    template auto ceil<unsigned int>(ratio<unsigned int>) -> unsigned int;
+    template auto ceil<long int>(ratio<long int>) -> long int;
+    template auto ceil<unsigned long int>(ratio<unsigned long int>) -> unsigned long int;
+    template auto ceil<long long int>(ratio<long long int>) -> long long int;
+    template auto ceil<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
+
+    template<typename T>
+    auto constexpr ratio<T>::floor() -> T
+    {
+        auto quot = this->numerator / this->denominator;
+        auto rem = this->numerator % this->denominator;
+        if (rem < 0) {
+            quot--;
+        }
+        return quot;
+    }
+
+    template<typename T>
+    auto constexpr floor(ratio<T> r) -> T
+    {
+        return r.floor();
+    }
+
+    template auto floor<short int>(ratio<short int>) -> short int;
+    template auto floor<unsigned short int>(ratio<unsigned short int>) -> unsigned short int;
+    template auto floor<int>(ratio<int>) -> int;
+    template auto floor<unsigned int>(ratio<unsigned int>) -> unsigned int;
+    template auto floor<long int>(ratio<long int>) -> long int;
+    template auto floor<unsigned long int>(ratio<unsigned long int>) -> unsigned long int;
+    template auto floor<long long int>(ratio<long long int>) -> long long int;
+    template auto floor<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
+
+    template<typename T>
+    auto constexpr ratio<T>::truncate() -> T
+    {
+        return this->numerator / this->denominator;
+    }
+
+    template<typename T>
+    auto constexpr truncate(ratio<T> r) -> T
+    {
+        return r.truncate();
+    }
+
+    template auto truncate<short int>(ratio<short int>) -> short int;
+    template auto truncate<unsigned short int>(ratio<unsigned short int>) -> unsigned short int;
+    template auto truncate<int>(ratio<int>) -> int;
+    template auto truncate<unsigned int>(ratio<unsigned int>) -> unsigned int;
+    template auto truncate<long int>(ratio<long int>) -> long int;
+    template auto truncate<unsigned long int>(ratio<unsigned long int>) -> unsigned long int;
+    template auto truncate<long long int>(ratio<long long int>) -> long long int;
+    template auto truncate<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
+
+    template<typename T>
+    auto constexpr ratio<T>::round() -> T
+    {
+        auto quot = this->numerator / this->denominator;
+        auto rem = this->numerator % this->denominator;
+        if (0 < rem) {
+            quot++;
+        } else if (rem < 0) {
+            quot--;
+        }
+        return quot;
+    }
+
+    template<typename T>
+    auto constexpr round(ratio<T> r) -> T
+    {
+        return r.round();
+    }
+
+    template auto round<short int>(ratio<short int>) -> short int;
+    template auto round<unsigned short int>(ratio<unsigned short int>) -> unsigned short int;
+    template auto round<int>(ratio<int>) -> int;
+    template auto round<unsigned int>(ratio<unsigned int>) -> unsigned int;
+    template auto round<long int>(ratio<long int>) -> long int;
+    template auto round<unsigned long int>(ratio<unsigned long int>) -> unsigned long int;
+    template auto round<long long int>(ratio<long long int>) -> long long int;
+    template auto round<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
+
     template<typename T> template<typename CharT, typename Traits, typename Allocator>
     auto constexpr ratio<T>::to_string() -> std::basic_string<CharT, Traits, Allocator>
     {
