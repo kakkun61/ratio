@@ -82,28 +82,28 @@ TEST(ratio, reduce_member)
     EXPECT_EQ(a, ri(1, 1));
 }
 
-TEST(ratio, reduce_func)
+TEST(ratio, reduce_function)
 {
     ri a(1, -1);
     EXPECT_EQ(ratio::reduce(a), ri(-1, 1));
     EXPECT_EQ(a, ri(1, -1));
 }
 
-TEST(ratio, reduce_func_minus)
+TEST(ratio, reduce_function_minus)
 {
     ri a(1, -1);
     EXPECT_EQ(a.reduce(), ri(-1, 1));
     EXPECT_EQ(a, ri(1, -1));
 }
 
-TEST(ratio, reduce_func_numerator_zero)
+TEST(ratio, reduce_function_numerator_zero)
 {
     ri a(0, 2);
     EXPECT_EQ(a.reduce(), ri(0, 1));
     EXPECT_EQ(a, ri(0, 2));
 }
 
-TEST(ratio, reduce_func_denominator_zero)
+TEST(ratio, reduce_function_denominator_zero)
 {
     ri a(2, 0);
     EXPECT_EQ(a.reduce(), ri(1, 0));
@@ -117,31 +117,31 @@ TEST(ratio, inverse_member)
     EXPECT_EQ(a, ri(2, 1));
 }
 
-TEST(ratio, inverse_func)
+TEST(ratio, inverse_function)
 {
     ri a(1, 2);
     EXPECT_EQ(ratio::invert(a), ri(2, 1));
     EXPECT_EQ(a, ri(1, 2));
 }
 
-TEST(ratio, abs_member)
+TEST(ratio, absolute_member)
 {
     ri a(-1, 2);
-    EXPECT_EQ(a.abs(), ri(1, 2));
+    EXPECT_EQ(a.absolute(), ri(1, 2));
     EXPECT_EQ(a, ri(1, 2));
 }
 
-TEST(ratio, abs_member_unsigned)
+TEST(ratio, absolute_member_unsigned)
 {
     r<unsigned int> a(1, 2);
-    EXPECT_EQ(a.abs(), r<unsigned int>(1, 2));
+    EXPECT_EQ(a.absolute(), r<unsigned int>(1, 2));
     EXPECT_EQ(a, r<unsigned int>(1, 2));
 }
 
-TEST(ratio, abs_func)
+TEST(ratio, absolute_function)
 {
     ri a(-1, 2);
-    EXPECT_EQ(ratio::abs(a), ri(1, 2));
+    EXPECT_EQ(ratio::absolute(a), ri(1, 2));
     EXPECT_EQ(a, ri(-1, 2));
 }
 
@@ -178,12 +178,12 @@ TEST(ratio, to_double_member)
     EXPECT_DOUBLE_EQ(ri(1, 2).to_double(), 1. / 2);
 }
 
-TEST(ratio, to_double_func)
+TEST(ratio, to_double_function)
 {
     EXPECT_DOUBLE_EQ(ratio::to_double(ri(1, 2)), 1. / 2);
 }
 
-TEST(ratio, to_double_func_nan)
+TEST(ratio, to_double_function_nan)
 {
     EXPECT_DOUBLE_EQ(ratio::to_double(ri(1, 0)), std::numeric_limits<double>::infinity());
 }

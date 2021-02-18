@@ -240,32 +240,32 @@ namespace ratio
     template auto invert<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr ratio<T>::abs() -> ratio<T>
+    auto constexpr ratio<T>::absolute() -> ratio<T>
     {
         this->numerator = std::abs(this->numerator);
         this->denominator = std::abs(this->denominator);
         return *this;
     }
 
-    template<> auto constexpr ratio<unsigned short int>::abs() -> ratio<unsigned short int> { return *this; }
-    template<> auto constexpr ratio<unsigned int>::abs() -> ratio<unsigned int> { return *this; }
-    template<> auto constexpr ratio<unsigned long int>::abs() -> ratio<unsigned long int> { return *this; }
-    template<> auto constexpr ratio<unsigned long long int>::abs() -> ratio<unsigned long long int> { return *this; }
+    template<> auto constexpr ratio<unsigned short int>::absolute() -> ratio<unsigned short int> { return *this; }
+    template<> auto constexpr ratio<unsigned int>::absolute() -> ratio<unsigned int> { return *this; }
+    template<> auto constexpr ratio<unsigned long int>::absolute() -> ratio<unsigned long int> { return *this; }
+    template<> auto constexpr ratio<unsigned long long int>::absolute() -> ratio<unsigned long long int> { return *this; }
 
     template<typename T>
-    auto constexpr abs(ratio<T> r) -> ratio<T>
+    auto constexpr absolute(ratio<T> r) -> ratio<T>
     {
-        return r.abs();
+        return r.absolute();
     }
 
-    template auto abs<short int>(ratio<short int>) -> ratio<short int>;
-    template auto abs<unsigned short int>(ratio<unsigned short int>) -> ratio<unsigned short int>;
-    template auto abs<int>(ratio<int>) -> ratio<int>;
-    template auto abs<unsigned int>(ratio<unsigned int>) -> ratio<unsigned int>;
-    template auto abs<long int>(ratio<long int>) -> ratio<long int>;
-    template auto abs<unsigned long int>(ratio<unsigned long int>) -> ratio<unsigned long int>;
-    template auto abs<long long int>(ratio<long long int>) -> ratio<long long int>;
-    template auto abs<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
+    template auto absolute<short int>(ratio<short int>) -> ratio<short int>;
+    template auto absolute<unsigned short int>(ratio<unsigned short int>) -> ratio<unsigned short int>;
+    template auto absolute<int>(ratio<int>) -> ratio<int>;
+    template auto absolute<unsigned int>(ratio<unsigned int>) -> ratio<unsigned int>;
+    template auto absolute<long int>(ratio<long int>) -> ratio<long int>;
+    template auto absolute<unsigned long int>(ratio<unsigned long int>) -> ratio<unsigned long int>;
+    template auto absolute<long long int>(ratio<long long int>) -> ratio<long long int>;
+    template auto absolute<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
     auto constexpr ratio<T>::to_double() -> double
