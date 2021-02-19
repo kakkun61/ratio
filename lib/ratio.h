@@ -4,6 +4,10 @@
 #include <string>
 #include <type_traits>
 
+#ifdef __clang__
+#define constexpr
+#endif
+
 /// \mainpage
 /// Rational number.
 
