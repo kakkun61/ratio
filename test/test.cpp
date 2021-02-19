@@ -1,0 +1,258 @@
+#include "../lib/ratio.h"
+
+#include <iostream>
+#include <gtest/gtest.h>
+
+template<typename T>
+using r = ratio::ratio<T>;
+
+using ri = r<int>;
+
+TEST(ratio, ctor_n_d_false)
+{
+    ri a(2, 2, false);
+    EXPECT_EQ(a.numerator, 2);
+    EXPECT_EQ(a.denominator, 2);
+}
+
+TEST(ratio, ctor_n_d_true)
+{
+    EXPECT_EQ(ri(2, 2), ri(1, 1, false));
+}
+
+TEST(ratio, ctor_n)
+{
+    EXPECT_EQ(ri(2), ri(2, 1, false));
+}
+
+TEST(ratio, eq)
+{
+    ri a(1, 2), b(2, 4, false);
+    EXPECT_EQ(a, b);
+}
+
+TEST(ratio, lt)
+{
+    ri a(1, 2), b(1);
+    EXPECT_LT(a, b);
+}
+
+TEST(ratio, le)
+{
+    ri a(1);
+    EXPECT_LE(a, a);
+}
+
+TEST(ratio, gt)
+{
+    ri a(1), b(1, 2);
+    EXPECT_GT(a, b);
+}
+
+TEST(ratio, ge)
+{
+    ri a(1);
+    EXPECT_GE(a, a);
+}
+
+TEST(ratio, negate)
+{
+    ri a(1);
+    EXPECT_EQ(a.negate(), ri(-1, 1));
+    EXPECT_EQ(a, ri(-1, 1));
+}
+
+TEST(ratio, negate_unsigned)
+{
+    r<unsigned int> a(1);
+    EXPECT_ANY_THROW(a.negate());
+}
+
+TEST(ratio, minus)
+{
+    ri a(1);
+    EXPECT_EQ((-a).numerator, -1);
+    EXPECT_EQ((-a).denominator, 1);
+}
+
+TEST(ratio, reduce_member)
+{
+    ri a(2, 2);
+    EXPECT_EQ(a.reduce(), ri(1, 1));
+    EXPECT_EQ(a, ri(1, 1));
+}
+
+TEST(ratio, reduce_function)
+{
+    ri a(1, -1);
+    EXPECT_EQ(ratio::reduce(a), ri(-1, 1));
+    EXPECT_EQ(a, ri(1, -1));
+}
+
+TEST(ratio, reduce_function_minus)
+{
+    ri a(1, -1);
+    EXPECT_EQ(a.reduce(), ri(-1, 1));
+    EXPECT_EQ(a, ri(1, -1));
+}
+
+TEST(ratio, reduce_function_numerator_zero)
+{
+    ri a(0, 2);
+    EXPECT_EQ(a.reduce(), ri(0, 1));
+    EXPECT_EQ(a, ri(0, 2));
+}
+
+TEST(ratio, reduce_function_denominator_zero)
+{
+    ri a(2, 0);
+    EXPECT_EQ(a.reduce(), ri(1, 0));
+    EXPECT_EQ(a, ri(2, 0));
+}
+
+TEST(ratio, inverse_member)
+{
+    ri a(1, 2);
+    EXPECT_EQ(a.invert(), ri(2, 1));
+    EXPECT_EQ(a, ri(2, 1));
+}
+
+TEST(ratio, inverse_function)
+{
+    ri a(1, 2);
+    EXPECT_EQ(ratio::invert(a), ri(2, 1));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, absolute_member)
+{
+    ri a(-1, 2);
+    EXPECT_EQ(a.absolute(), ri(1, 2));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, absolute_member_unsigned)
+{
+    r<unsigned int> a(1, 2);
+    EXPECT_EQ(a.absolute(), r<unsigned int>(1, 2));
+    EXPECT_EQ(a, r<unsigned int>(1, 2));
+}
+
+TEST(ratio, absolute_function)
+{
+    ri a(-1, 2);
+    EXPECT_EQ(ratio::absolute(a), ri(1, 2));
+    EXPECT_EQ(a, ri(-1, 2));
+}
+
+TEST(ratio, add)
+{
+    ri a(1, 2);
+    EXPECT_EQ(a + a, ri(1, 1));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, subtract)
+{
+    ri a(1, 2);
+    EXPECT_EQ(a - a, ri(0, 1));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, multiply)
+{
+    ri a(1, 2);
+    EXPECT_EQ(a * a, ri(1, 4));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, divide)
+{
+    ri a(1, 2);
+    EXPECT_EQ(a / a, ri(1, 1));
+    EXPECT_EQ(a, ri(1, 2));
+}
+
+TEST(ratio, to_double_member)
+{
+    EXPECT_DOUBLE_EQ(ri(1, 2).to_double(), 1. / 2);
+}
+
+TEST(ratio, to_double_function)
+{
+    EXPECT_DOUBLE_EQ(ratio::to_double(ri(1, 2)), 1. / 2);
+}
+
+TEST(ratio, to_double_function_nan)
+{
+    EXPECT_DOUBLE_EQ(ratio::to_double(ri(1, 0)), std::numeric_limits<double>::infinity());
+}
+
+TEST(ratio, ceil_member)
+{
+    EXPECT_EQ(ri(3, 2).ceil(), 2);
+    EXPECT_EQ(ri(-3, 2).ceil(), -1);
+    EXPECT_EQ(ri(1, 1).ceil(), 1);
+    EXPECT_EQ(ri(-1, 1).ceil(), -1);
+}
+
+TEST(ratio, ceil_function)
+{
+    EXPECT_EQ(ratio::ceil(ri(3, 2)), 2);
+    EXPECT_EQ(ratio::ceil(ri(-3, 2)), -1);
+    EXPECT_EQ(ratio::ceil(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::ceil(ri(-1, 1)), -1);
+}
+
+TEST(ratio, floor_member)
+{
+    EXPECT_EQ(ri(3, 2).floor(), 1);
+    EXPECT_EQ(ri(-3, 2).floor(), -2);
+    EXPECT_EQ(ri(1, 1).floor(), 1);
+    EXPECT_EQ(ri(-1, 1).floor(), -1);
+}
+
+TEST(ratio, floor_function)
+{
+    EXPECT_EQ(ratio::floor(ri(3, 2)), 1);
+    EXPECT_EQ(ratio::floor(ri(-3, 2)), -2);
+    EXPECT_EQ(ratio::floor(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::floor(ri(-1, 1)), -1);
+}
+
+TEST(ratio, truncate_member)
+{
+    EXPECT_EQ(ri(3, 2).truncate(), 1);
+    EXPECT_EQ(ri(-3, 2).truncate(), -1);
+    EXPECT_EQ(ri(1, 1).truncate(), 1);
+    EXPECT_EQ(ri(-1, 1).truncate(), -1);
+}
+
+TEST(ratio, truncate_function)
+{
+    EXPECT_EQ(ratio::truncate(ri(3, 2)), 1);
+    EXPECT_EQ(ratio::truncate(ri(-3, 2)), -1);
+    EXPECT_EQ(ratio::truncate(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::truncate(ri(-1, 1)), -1);
+}
+
+TEST(ratio, round_member)
+{
+    EXPECT_EQ(ri(3, 2).round(), 2);
+    EXPECT_EQ(ri(-3, 2).round(), -2);
+    EXPECT_EQ(ri(1, 1).round(), 1);
+    EXPECT_EQ(ri(-1, 1).round(), -1);
+}
+
+TEST(ratio, round_function)
+{
+    EXPECT_EQ(ratio::round(ri(3, 2)), 2);
+    EXPECT_EQ(ratio::round(ri(-3, 2)), -2);
+    EXPECT_EQ(ratio::round(ri(1, 1)), 1);
+    EXPECT_EQ(ratio::round(ri(-1, 1)), -1);
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
