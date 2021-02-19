@@ -10,13 +10,13 @@ using namespace std::literals;
 namespace ratio
 {
     template<typename T>
-    constexpr ratio<T>::ratio(T n, T d, bool reduce) : numerator(n), denominator(d)
+    constexpr ratio<T>::ratio(T n, T d, bool reduce) noexcept : numerator(n), denominator(d)
     {
         if (reduce) this->reduce();
     }
 
     template<typename T>
-    auto constexpr operator==(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator==(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         l.reduce();
         r.reduce();
@@ -33,7 +33,7 @@ namespace ratio
     template auto operator==(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto constexpr operator!=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator!=(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         return !(l == r);
     }
@@ -48,7 +48,7 @@ namespace ratio
     template auto operator!=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto constexpr operator<(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator<(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         l.reduce();
         r.reduce();
@@ -65,7 +65,7 @@ namespace ratio
     template auto operator<(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto constexpr operator<=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator<=(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         return l < r || l == r;
     }
@@ -80,7 +80,7 @@ namespace ratio
     template auto operator<=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto constexpr operator>(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator>(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         return r < l;
     }
@@ -95,7 +95,7 @@ namespace ratio
     template auto operator>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto constexpr operator>=(ratio<T> l, ratio<T> r) -> bool
+    auto constexpr operator>=(ratio<T> l, ratio<T> r) noexcept -> bool
     {
         return l > r || l == r;
     }
@@ -110,19 +110,19 @@ namespace ratio
     template auto operator>=(ratio<unsigned long long int>, ratio<unsigned long long int>) -> bool;
 
     template<typename T>
-    auto ratio<T>::negate() -> ratio<T>
+    auto ratio<T>::negate() noexcept(std::is_signed<T>()) -> ratio<T>
     {
         numerator = - numerator;
         return *this;
     }
 
-    template<> auto ratio<unsigned short int>::negate() -> ratio<unsigned short int> { throw exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned int>::negate() -> ratio<unsigned int> { throw exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned long int>::negate() -> ratio<unsigned long int> { throw exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned long long int>::negate() -> ratio<unsigned long long int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned short int>::negate() noexcept(std::is_signed<unsigned short int>()) -> ratio<unsigned short int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned int>::negate() noexcept(std::is_signed<unsigned int>()) -> ratio<unsigned int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned long int>::negate() noexcept(std::is_signed<unsigned long int>()) -> ratio<unsigned long int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned long long int>::negate() noexcept(std::is_signed<unsigned long long int>()) -> ratio<unsigned long long int> { throw exception("unsigned values cannot be negated"); }
 
     template<typename T>
-    auto constexpr operator-(ratio<T> r) -> ratio<T>
+    auto constexpr operator-(ratio<T> r) noexcept -> ratio<T>
     {
         return r.negate();
     }
@@ -133,7 +133,7 @@ namespace ratio
     template auto operator-(ratio<long long int>) -> ratio<long long int>;
 
     template<typename T>
-    auto constexpr operator+(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator+(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
         return ratio<T>(l.numerator * r.denominator + r.numerator * l.denominator, l.denominator * r.denominator).reduce();
     }
@@ -148,7 +148,7 @@ namespace ratio
     template auto operator+<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr operator-(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator-(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
         return l + r.negate();
     }
@@ -163,7 +163,7 @@ namespace ratio
     template auto operator-<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr operator*(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator*(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
         return ratio<T>(l.numerator * r.numerator, l.denominator * r.denominator).reduce();
     }
@@ -178,7 +178,7 @@ namespace ratio
     template auto operator*<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr operator/(ratio<T> l, ratio<T> r) -> ratio<T>
+    auto constexpr operator/(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
         return l * r.invert();
     }
@@ -193,7 +193,7 @@ namespace ratio
     template auto operator/<unsigned long long int>(ratio<unsigned long long int>, ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr ratio<T>::reduce() -> ratio<T>
+    auto constexpr ratio<T>::reduce() noexcept -> ratio<T>
     {
         if (denominator < 0) { numerator *= -1; denominator *= -1; }
         auto m = std::gcd(denominator, numerator);
@@ -203,7 +203,7 @@ namespace ratio
     }
 
     template<typename T>
-    auto constexpr reduce(ratio<T> r) -> ratio<T>
+    auto constexpr reduce(ratio<T> r) noexcept -> ratio<T>
     {
         return r.reduce();
     }
@@ -218,14 +218,14 @@ namespace ratio
     template auto reduce<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr ratio<T>::invert() -> ratio<T>
+    auto constexpr ratio<T>::invert() noexcept -> ratio<T>
     {
         std::swap(this->numerator, this->denominator);
         return *this;
     }
 
     template<typename T>
-    auto constexpr invert(ratio<T> r) -> ratio<T>
+    auto constexpr invert(ratio<T> r) noexcept -> ratio<T>
     {
         return r.invert();
     }
@@ -240,20 +240,20 @@ namespace ratio
     template auto invert<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr ratio<T>::absolute() -> ratio<T>
+    auto constexpr ratio<T>::absolute() noexcept -> ratio<T>
     {
         this->numerator = std::abs(this->numerator);
         this->denominator = std::abs(this->denominator);
         return *this;
     }
 
-    template<> auto constexpr ratio<unsigned short int>::absolute() -> ratio<unsigned short int> { return *this; }
-    template<> auto constexpr ratio<unsigned int>::absolute() -> ratio<unsigned int> { return *this; }
-    template<> auto constexpr ratio<unsigned long int>::absolute() -> ratio<unsigned long int> { return *this; }
-    template<> auto constexpr ratio<unsigned long long int>::absolute() -> ratio<unsigned long long int> { return *this; }
+    template<> auto constexpr ratio<unsigned short int>::absolute() noexcept -> ratio<unsigned short int> { return *this; }
+    template<> auto constexpr ratio<unsigned int>::absolute() noexcept -> ratio<unsigned int> { return *this; }
+    template<> auto constexpr ratio<unsigned long int>::absolute() noexcept -> ratio<unsigned long int> { return *this; }
+    template<> auto constexpr ratio<unsigned long long int>::absolute() noexcept -> ratio<unsigned long long int> { return *this; }
 
     template<typename T>
-    auto constexpr absolute(ratio<T> r) -> ratio<T>
+    auto constexpr absolute(ratio<T> r) noexcept -> ratio<T>
     {
         return r.absolute();
     }
@@ -268,13 +268,13 @@ namespace ratio
     template auto absolute<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
-    auto constexpr ratio<T>::to_double() -> double
+    auto constexpr ratio<T>::to_double() noexcept -> double
     {
         return static_cast<double>(this->numerator) / static_cast<double>(this->denominator);
     }
 
     template<typename T>
-    auto constexpr to_double(ratio<T> r) -> double
+    auto constexpr to_double(ratio<T> r) noexcept -> double
     {
         return r.to_double();
     }
@@ -289,7 +289,7 @@ namespace ratio
     template auto to_double<unsigned long long int>(ratio<unsigned long long int>) -> double;
 
     template<typename T>
-    auto constexpr ratio<T>::ceil() -> T
+    auto constexpr ratio<T>::ceil() noexcept -> T
     {
         auto quot = this->numerator / this->denominator;
         auto rem = this->numerator % this->denominator;
@@ -300,7 +300,7 @@ namespace ratio
     }
 
     template<typename T>
-    auto constexpr ceil(ratio<T> r) -> T
+    auto constexpr ceil(ratio<T> r) noexcept -> T
     {
         return r.ceil();
     }
@@ -315,7 +315,7 @@ namespace ratio
     template auto ceil<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
 
     template<typename T>
-    auto constexpr ratio<T>::floor() -> T
+    auto constexpr ratio<T>::floor() noexcept -> T
     {
         auto quot = this->numerator / this->denominator;
         auto rem = this->numerator % this->denominator;
@@ -326,7 +326,7 @@ namespace ratio
     }
 
     template<typename T>
-    auto constexpr floor(ratio<T> r) -> T
+    auto constexpr floor(ratio<T> r) noexcept -> T
     {
         return r.floor();
     }
@@ -341,13 +341,13 @@ namespace ratio
     template auto floor<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
 
     template<typename T>
-    auto constexpr ratio<T>::truncate() -> T
+    auto constexpr ratio<T>::truncate() noexcept -> T
     {
         return this->numerator / this->denominator;
     }
 
     template<typename T>
-    auto constexpr truncate(ratio<T> r) -> T
+    auto constexpr truncate(ratio<T> r) noexcept -> T
     {
         return r.truncate();
     }
@@ -362,7 +362,7 @@ namespace ratio
     template auto truncate<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
 
     template<typename T>
-    auto constexpr ratio<T>::round() -> T
+    auto constexpr ratio<T>::round() noexcept -> T
     {
         auto quot = this->numerator / this->denominator;
         auto rem = this->numerator % this->denominator;
@@ -375,7 +375,7 @@ namespace ratio
     }
 
     template<typename T>
-    auto constexpr round(ratio<T> r) -> T
+    auto constexpr round(ratio<T> r) noexcept -> T
     {
         return r.round();
     }
@@ -390,13 +390,13 @@ namespace ratio
     template auto round<unsigned long long int>(ratio<unsigned long long int>) -> unsigned long long int;
 
     template<typename T> template<typename CharT, typename Traits, typename Allocator>
-    auto constexpr ratio<T>::to_string() -> std::basic_string<CharT, Traits, Allocator>
+    auto constexpr ratio<T>::to_string() noexcept -> std::basic_string<CharT, Traits, Allocator>
     {
         return std::to_string(this->numerator) + "/"s + std::to_string(this->denominator);
     }
 
     template<typename T, typename CharT, typename Traits, typename Allocator>
-    auto constexpr to_string(ratio<T> r) -> std::basic_string<CharT, Traits, Allocator>
+    auto constexpr to_string(ratio<T> r) noexcept -> std::basic_string<CharT, Traits, Allocator>
     {
         return r.to_string<CharT, Traits, Allocator>();
     }
