@@ -171,7 +171,7 @@ namespace ratio
     {
         exception(char const* const message);
 
-        char const* what() const override;
+        char const* what() const noexcept override;
 
     private:
         char const* message;

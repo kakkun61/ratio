@@ -398,7 +398,7 @@ namespace ratio
     template<typename T, typename CharT, typename Traits, typename Allocator>
     auto constexpr to_string(ratio<T> r) noexcept -> std::basic_string<CharT, Traits, Allocator>
     {
-        return r.to_string<CharT, Traits, Allocator>();
+        return r.template to_string<CharT, Traits, Allocator>();
     }
 
     template auto to_string<short int>(ratio<short int>) -> std::string;
@@ -421,7 +421,7 @@ namespace ratio
 
     exception::exception(char const* const message) : message(message) {}
 
-    char const* exception::what() const
+    char const* exception::what() const noexcept
     {
         return message;
     }
