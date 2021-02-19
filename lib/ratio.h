@@ -1,5 +1,6 @@
 #pragma once
 
+#include <exception>
 #include <string>
 
 /// \mainpage
@@ -164,4 +165,14 @@ namespace ratio
     /// \param r
     template<typename T, typename CharT, typename Traits = std::char_traits<CharT>, typename Allocator = std::allocator<CharT>>
     auto constexpr to_string(ratio<T> r) -> std::basic_string<CharT, Traits, Allocator>;
+
+    struct exception : public std::exception
+    {
+        exception(char const* const message);
+
+        char const* what() const override;
+
+    private:
+        char const* message;
+    };
 }

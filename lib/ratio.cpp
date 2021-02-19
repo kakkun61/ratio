@@ -116,10 +116,10 @@ namespace ratio
         return *this;
     }
 
-    template<> auto ratio<unsigned short int>::negate() -> ratio<unsigned short int> { throw std::exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned int>::negate() -> ratio<unsigned int> { throw std::exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned long int>::negate() -> ratio<unsigned long int> { throw std::exception("unsigned values cannot be negated"); }
-    template<> auto ratio<unsigned long long int>::negate() -> ratio<unsigned long long int> { throw std::exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned short int>::negate() -> ratio<unsigned short int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned int>::negate() -> ratio<unsigned int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned long int>::negate() -> ratio<unsigned long int> { throw exception("unsigned values cannot be negated"); }
+    template<> auto ratio<unsigned long long int>::negate() -> ratio<unsigned long long int> { throw exception("unsigned values cannot be negated"); }
 
     template<typename T>
     auto constexpr operator-(ratio<T> r) -> ratio<T>
@@ -418,4 +418,11 @@ namespace ratio
     template struct ratio<unsigned long int>;
     template struct ratio<long long int>;
     template struct ratio<unsigned long long int>;
+
+    exception::exception(char const* const message) : message(message) {}
+
+    char const* exception::what() const
+    {
+        return message;
+    }
 }
