@@ -135,7 +135,7 @@ namespace ratio
     template<typename T>
     auto constexpr operator+(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
-        return ratio<T>(l.numerator * r.denominator + r.numerator * l.denominator, l.denominator * r.denominator).reduce();
+        return ratio<T>(static_cast<T>(l.numerator * r.denominator + r.numerator * l.denominator), static_cast<T>(l.denominator * r.denominator)).reduce();
     }
 
     template auto operator+<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
@@ -165,7 +165,7 @@ namespace ratio
     template<typename T>
     auto constexpr operator*(ratio<T> l, ratio<T> r) noexcept -> ratio<T>
     {
-        return ratio<T>(l.numerator * r.numerator, l.denominator * r.denominator).reduce();
+        return ratio<T>(static_cast<T>(l.numerator * r.numerator), static_cast<T>(l.denominator * r.denominator)).reduce();
     }
 
     template auto operator*<short int>(ratio<short int>, ratio<short int>) -> ratio<short int>;
@@ -195,7 +195,7 @@ namespace ratio
     template<typename T>
     auto constexpr ratio<T>::reduce() noexcept -> ratio<T>
     {
-        if (denominator < 0) { numerator *= -1; denominator *= -1; }
+        if (denominator < 0) { numerator *= static_cast<T>(-1); denominator *= static_cast<T>(-1); }
         auto m = std::gcd(denominator, numerator);
         numerator /= m;
         denominator /= m;
@@ -240,10 +240,16 @@ namespace ratio
     template auto invert<unsigned long long int>(ratio<unsigned long long int>) -> ratio<unsigned long long int>;
 
     template<typename T>
+    auto constexpr abs(T i) -> T
+    {
+        return i < 0 ? -i : i;
+    }
+
+    template<typename T>
     auto constexpr ratio<T>::absolute() noexcept -> ratio<T>
     {
-        this->numerator = std::abs(this->numerator);
-        this->denominator = std::abs(this->denominator);
+        this->numerator = abs(this->numerator);
+        this->denominator = abs(this->denominator);
         return *this;
     }
 
@@ -291,8 +297,8 @@ namespace ratio
     template<typename T>
     auto constexpr ratio<T>::ceil() noexcept -> T
     {
-        auto quot = this->numerator / this->denominator;
-        auto rem = this->numerator % this->denominator;
+        auto quot = static_cast<T>( this->numerator / this->denominator);
+        auto rem = static_cast<T>(this->numerator % this->denominator);
         if (0 < rem) {
             quot++;
         }
@@ -317,8 +323,8 @@ namespace ratio
     template<typename T>
     auto constexpr ratio<T>::floor() noexcept -> T
     {
-        auto quot = this->numerator / this->denominator;
-        auto rem = this->numerator % this->denominator;
+        auto quot = static_cast<T>(this->numerator / this->denominator);
+        auto rem = static_cast<T>(this->numerator % this->denominator);
         if (rem < 0) {
             quot--;
         }
@@ -343,7 +349,7 @@ namespace ratio
     template<typename T>
     auto constexpr ratio<T>::truncate() noexcept -> T
     {
-        return this->numerator / this->denominator;
+        return static_cast<T>(this->numerator / this->denominator);
     }
 
     template<typename T>
@@ -364,8 +370,8 @@ namespace ratio
     template<typename T>
     auto constexpr ratio<T>::round() noexcept -> T
     {
-        auto quot = this->numerator / this->denominator;
-        auto rem = this->numerator % this->denominator;
+        auto quot = static_cast<T>(this->numerator / this->denominator);
+        auto rem = static_cast<T>(this->numerator % this->denominator);
         if (0 < rem) {
             quot++;
         } else if (rem < 0) {
